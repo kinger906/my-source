@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>读取Excel文件并展示表格</title>
+</head>
+<body>
+  <div id="test" style="width: 100vw;height: 100vh;"></div>
+  <script>
+    fetch('https://raw.githubusercontent.com/kinger906/my-source/public/web/my-player/index.html')
+    .then(response => response.text())
+    .then(html => {
+      // 在这里处理返回的 HTML 内容
+      console.log(html);
+      document.querySelector('#test').innerHTML = html
+    })
+    .catch(error => {
+      // 处理错误
+      console.error(error);
+    });
+
+    fetch('https://raw.githubusercontent.com/kinger906/my-source/public/web/my-player/umi.js')
+    .then(response => response.text())
+    .then(jsCode => {
+         // 创建 <script> 元素
+        const scriptElement = document.createElement('script');
+        scriptElement.textContent = jsCode;
+
+        // 将 <script> 元素附加到 <body> 或 <head> 中，根据需要进行调整
+        document.body.appendChild(scriptElement);
+    })
+    .catch(error => {
+      // 处理错误
+      console.error(error);
+    });
+
+    fetch('https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js')
+    .then(response => response.text())
+    .then(jsCode => {
+         // 创建 <script> 元素
+        const scriptElement = document.createElement('script');
+        scriptElement.textContent = jsCode;
+
+        // 将 <script> 元素附加到 <body> 或 <head> 中，根据需要进行调整
+        document.body.appendChild(scriptElement);
+    })
+    .catch(error => {
+      // 处理错误
+      console.error(error);
+    });
+
+    fetch('https://raw.githubusercontent.com/kinger906/my-source/public/web/my-player/umi.css')
+    .then(response => response.text())
+    .then(cssCode => {
+        // 将 CSS 代码附加到 <style> 标签中
+        const styleElement = document.createElement('style');
+        styleElement.textContent = cssCode;
+        document.head.appendChild(styleElement);
+    })
+    .catch(error => {
+    // 处理错误
+    console.error(error);
+    });
+  </script>
+</body>
+</html>
