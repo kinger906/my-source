@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>读取Excel文件并展示表格</title>
+  <style>
+    #tableContainer {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #tableContainer table {
+        width: 100%;
+    }
+
+    #tableContainer th {
+      background-color: #f2f2f2;
+      text-align: left;
+      padding: 8px;
+      border-collapse: collapse;
+    }
+
+    #tableContainer td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    #tableContainer tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .merged-cell {
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <input type="file" id="fileInput">
+  <div id="tableContainer"></div>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script>
+    document.getElementById('fileInput').addEventListener('change', handleFile, false);
+
+    function handleFile(e) {
+      var files = e.target.files;
+      var file = files[0];
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var data = new Uint8Array(e.target.result);
+        var workbook = XLSX.read(data, { type: 'array' });
+        var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        var htmlTable = XLSX.utils.sheet_to_html(worksheet);
+        document.getElementById('tableContainer').innerHTML = htmlTable;
+        document.querySelector('table').setAttribute('cellspacing',0)
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // const fileUrl = 'https://mpr.cdn.meijingdata.com/meijing-research-web/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%9B%B7%E8%BE%BE%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92.xlsx';
+    // fetch(fileUrl)
+    //   .then(response => response.arrayBuffer())
+    //   .then(data => {
+    //     const workbook = XLSX.read(data, {type: 'array'});
+    //     const sheetName = workbook.SheetNames[0];
+    //     const worksheet = workbook.Sheets[sheetName];
+    //     const htmlTable = XLSX.utils.sheet_to_html(worksheet);
+
+    //     document.getElementById('tableContainer').innerHTML = htmlTable;
+    //     document.querySelector('table').setAttribute('cellspacing',0)
+    //   })
+    //   .catch(error => console.error(error));
+  </script>
+</body>
+</html>

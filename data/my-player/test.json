@@ -1,0 +1,9 @@
+{
+    "theme":"dark",
+    "styles":{
+        "width":"865px",
+        "fontSize":"15px",
+        "marginTop":"10px",
+        "marginLeft":"-10px"
+    }
+}
