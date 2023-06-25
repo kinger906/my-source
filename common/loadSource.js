@@ -29,7 +29,6 @@ const loadSource = {
     getJsCss: (htmlString, type) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
-        debugger
         const elementTags = doc.getElementsByTagName(type);
         const arrSource = []
         for (const tag of elementTags) {
