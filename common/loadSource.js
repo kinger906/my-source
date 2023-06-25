@@ -45,13 +45,11 @@ const loadSource = {
     },
     // 批量加载JS或CSS文件，自动补充相对路径
     loadGroupJsCss: (arrSource, type, relativeUrl) => {
-        debugger
         arrSource.forEach((soureItem) => {
             let currentPath = soureItem
             if (!soureItem.includes('http')) {
                 currentPath = relativeUrl + soureItem
             }
-            console.log(currentPath)
             loadSource.loadJsCss(currentPath, type)
         })
     }

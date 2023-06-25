@@ -2,14 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>读取Excel文件并展示表格</title>
+    <title>通用模板（appCode就是app代码仓库名称）</title>
   </head>
   <body>
-    <div id="fuck" style="width: 100vw; height: 100vh"></div>
+    <div id="template_container" style="width: 100vw; height: 100vh"></div>
     <script>
-      const rootSource =
-        "https://raw.githubusercontent.com/kinger906/my-source/public/web/my-player";
-        
+      const appCode = "my-player"
+      const rootSource = `https://raw.githubusercontent.com/kinger906/my-source/public/web/${appCode}`;
+
       fetch("https://raw.githubusercontent.com/kinger906/my-source/public/common/loadSource.js")
         .then((response) => response.text())
         .then((jsCode) => {
@@ -20,15 +20,13 @@
           loadSource.loadHtml(
             `${rootSource}/index.html`,
             (html, arrJS, arrCss) => {
-              console.log(html,'html')
-              document.querySelector("#fuck").innerHTML = html;
+              document.querySelector("#template_container").innerHTML = html;
               loadSource.loadGroupJsCss(arrJS,'script',rootSource);
               loadSource.loadGroupJsCss(arrCss,'style',rootSource);
             }
           );
         })
         .catch((error) => {
-          // 处理错误
           console.error(error);
         });
     </script>
