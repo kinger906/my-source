@@ -13,7 +13,7 @@ const loadSource = {
     },
     // 加载html文件，并提取JS和CSS文件返回
     loadHtml: (path, callback) => {
-        console.log(path,'html')
+        console.log(path, 'html')
         fetch(path)
             .then(response => response.text())
             .then(html => {
@@ -44,14 +44,31 @@ const loadSource = {
         return arrSource;
     },
     // 批量加载JS或CSS文件，自动补充相对路径
-    loadGroupJsCss: (arrSource, type, relativeUrl) => {
+    loadGroupJsCss: (arrSource, type, relativeUrl, addType = 'load') => {
         arrSource.forEach((soureItem) => {
             let currentPath = soureItem
             if (!soureItem.includes('http')) {
                 currentPath = relativeUrl + soureItem
             }
-            loadSource.loadJsCss(currentPath, type)
+            if (addType === 'load') {
+                loadSource.loadJsCss(currentPath, type)
+            }
+            else {
+                loadSource.appendJsCss(currentPath, type)
+            }
         })
+    },
+    // 添加JS和CSS文件-附加的方式
+    appendJsCss: (srcPath) => {
+        const strFile = `${srcPath}?d=${new Date().getTime()}`
+        let strJS = ''
+        if (type === 'script') {
+            strJS = `<script src="${srcPath}"><\/script>`
+        }
+        else {
+            strJS = `<link rel="stylesheet" href="${srcPath}"><\/link>`
+        }
+        document.write(strJS);
     }
 }
 
