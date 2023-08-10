@@ -59,14 +59,14 @@ const loadSource = {
         })
     },
     // 添加JS和CSS文件-附加的方式
-    appendJsCss: (srcPath) => {
+    appendJsCss: (srcPath,type) => {
         const strFile = `${srcPath}?d=${new Date().getTime()}`
         let strJS = ''
         if (type === 'script') {
-            strJS = `<script src="${srcPath}"><\/script>`
+            strJS = `<script src="${strFile}"><\/script>`
         }
         else {
-            strJS = `<link rel="stylesheet" href="${srcPath}"><\/link>`
+            strJS = `<link rel="stylesheet" href="${strFile}"><\/link>`
         }
         document.write(strJS);
     }

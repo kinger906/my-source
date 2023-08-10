@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>开前端服务-通用模板（appCode就是app代码仓库名称）</title>
+  </head>
+  <body>
+    <div id="template_container" style="width: 100vw; height: 100vh"></div>
+    <script>
+      const appCode = "my-player"
+      const rootSource = `https://raw.githubusercontent.com/kinger906/my-source/public/web/${appCode}`;
+
+      fetch("https://raw.githubusercontent.com/kinger906/my-source/public/common/loadSource.js")
+        .then((response) => response.text())
+        .then((jsCode) => {
+          const scriptElement = document.createElement("script");
+          scriptElement.textContent = jsCode;
+          document.body.appendChild(scriptElement);
+
+          loadSource.loadHtml(
+            `${rootSource}/index.html`,
+            (html, arrJS, arrCss) => {
+              document.querySelector("#template_container").innerHTML = html;
+              loadSource.loadGroupJsCss(arrJS,'script',rootSource);
+              loadSource.loadGroupJsCss(arrCss,'style',rootSource);
+            }
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    </script>
+  </body>
+</html>

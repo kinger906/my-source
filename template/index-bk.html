@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyPlayer播放器</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    window.routerBase = "/";
+    fetch("http://192.168.1.102:9020/loadSource.js")
+        .then((response) => response.text())
+        .then((jsCode) => {
+          const scriptElement = document.createElement("script");
+          scriptElement.textContent = jsCode;
+          document.body.appendChild(scriptElement);
+
+          loadSource.appendJsCss('https://mpr.cdn.meijingdata.com/mini-programs/meijing-research-web/assets/pages/work/dist/umi.css','link');
+          loadSource.appendJsCss('https://mpr.cdn.meijingdata.com/mini-programs/meijing-research-web/assets/pages/work/plusHelper.js','script');
+          loadSource.appendJsCss('https://mpr.cdn.meijingdata.com/mini-programs/meijing-research-web/assets/pages/work/dist/umi.js','script');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  </script>
+</html>
